@@ -17,7 +17,7 @@ module RailsAdmin
 
           # Accessor for field's formatted value
           register_instance_option(:formatted_value) do
-            object = bindings[:object].send(association[:name])
+            object = bindings[:object].method(association[:name]).call
             unless object.nil?
               RailsAdmin::Config.model(object).with(:object => object).object_label
             else
